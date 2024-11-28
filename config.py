@@ -10,7 +10,9 @@ class Config:
     n_shot: int = 5
     n_query: int = 16
     
+    epochs: int = 10
     batch_size: int = 64
+    num_episodes: int = 600
 
     chestxray_transforms: transforms = transforms.Compose([transforms.Resize((256, 256)),
                                                            transforms.ToTensor(),
