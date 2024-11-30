@@ -29,7 +29,7 @@ class ChestXrayDataset(Dataset):
         
         self.img_dir = img_dir
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Return the number of images in the dataset"""
         return len(self.filtered_data)
 

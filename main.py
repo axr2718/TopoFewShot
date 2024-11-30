@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     
-    transform = config.chestxray_transforms
+    transform = config.image_transforms
     dataset = ChestXrayDataset(csv_path='./data/chestx/Data_Entry_2017.csv', img_dir='./data/chestx/images', transform=transform)
 
     k_way = config.k_way
@@ -29,20 +29,20 @@ if __name__ == '__main__':
     model.to(device=device)
 
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.AdamW(model.parameters())
+    optimizer = optim.AdamW(model.parameters(), lr=1e-3, weight_decay=0.9)
 
     epochs = config.epochs
     batch_size = config.batch_size
     num_episodes = config.num_episodes
 
-    average_accuray = run_episodes(num_episodes=num_episodes,
-                                   dataset=dataset,
-                                   k_way=k_way,
-                                   n_shot=n_shot,
-                                   n_query=n_query,
-                                   model=model,
-                                   criterion=criterion,
-                                   optimizer=optimizer,
-                                   epochs=epochs,
-                                   batch_size=batch_size,
-                                   device=device)
+    accuracy_mean, accuracy_std = run_episodes(num_episodes=num_episodes,
+                                               dataset=dataset,
+                                               k_way=k_way,
+                                               n_shot=n_shot,
+                                               n_query=n_query,
+                                               model=model,
+                                               criterion=criterion,
+                                               optimizer=optimizer,
+                                               epochs=epochs,
+                                               batch_size=batch_size,
+                                               device=device)

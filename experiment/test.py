@@ -40,7 +40,9 @@ def test(model: nn.Module,
             correct += (predictions == labels).sum().item()
             total += labels.size(0)
 
-    accuracy = 100 * correct / total
-    
+    accuracy = 100 * (correct / total)
+
+    print(f"Accuracy = {accuracy}")
+
     return accuracy
 
