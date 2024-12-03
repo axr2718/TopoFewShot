@@ -30,8 +30,7 @@ def train(model: nn.Module,
     trainloader = DataLoader(dataset=support_dataset,
                              batch_size=batch_size,
                              shuffle=True,
-                             num_workers=4,
-                             pin_memory=True)
+                             num_workers=4)
     
     for epoch in range(epochs):
         total_loss = 0.0

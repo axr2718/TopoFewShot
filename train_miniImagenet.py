@@ -15,8 +15,7 @@ if __name__ == '__main__':
     transform = config.image_transforms
     dataset = MiniImageNetBaseDataset(json_path='./data/miniImagenet/base.json', transform=transform)
 
-    #device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    device = torch.device('cpu')
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     num_classes = len(dataset.classes)
     model = SwinV2(num_classes=num_classes, pretrained=False, freeze=False)
@@ -33,8 +32,8 @@ if __name__ == '__main__':
                           criterion=criterion,
                           optimizer=optimizer,
                           epochs=epochs,
-                          batch_size=batch_size,
+                          batch_size=16,
                           device=device)
     
-    torch.save(model.state_dict(), './saved_models/swinv2_miniImageNet_base_best.pth')
+    torch.save(trained_model.state_dict(), './saved_models/swinv2_miniImageNet_base.pth')
 
