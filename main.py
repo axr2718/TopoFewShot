@@ -20,7 +20,7 @@ if __name__ == '__main__':
         device = torch.device('cpu')
     
     transform = config.image_transforms
-    dataset = ChestXrayDataset(csv_path='./data/chestx/Data_Entry_2017.csv', img_dir='./data/chestx/images', transform=transform)
+    dataset = ChestXrayDataset(csv_path='/mnt/d/data/chestx/Data_Entry_2017.csv', img_dir='/mnt/d/data/chestx/images', transform=transform)
 
     k_way = config.k_way
     n_shot = config.n_shot
@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
     num_classes = k_way
 
-    pretrained_dict = torch.load('./saved_models/swinv2_miniImageNet_base.pth', weights_only=True)
+    pretrained_dict = torch.load('./saved_models/vit_miniImageNet_base.pth', weights_only=True)
     pretrained_dict = {k: v for k, v in pretrained_dict.items() if "head" not in k}
     pretrained_dict = {k.replace("_orig_mod.", ""): v for k, v in pretrained_dict.items()}
 
@@ -46,7 +46,7 @@ if __name__ == '__main__':
     model = torch.compile(model=model)
 
     criterion = nn.CrossEntropyLoss()
-    optimizer = create_optimizer.create_optimizer(model=model,learning_rate=1e-1, weight_decay=0.001)
+    optimizer = create_optimizer.create_optimizer(model=model, learning_rate=1e-1, weight_decay=0.001)
 
     epochs = config.epochs
     batch_size = config.batch_size

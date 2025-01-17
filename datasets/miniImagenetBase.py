@@ -32,7 +32,7 @@ class MiniImageNetBaseDataset(Dataset):
             
         return image, label
     
-def update_json_paths(json_path, new_prefix='./data/miniImagenet/images/'):
+def update_json_paths(json_path, new_prefix='/mnt/d/data/miniImagenet/'):
     """Update the image paths in the JSON file to match local directory structure."""
     with open(json_path, 'r') as f:
         data = json.load(f)
